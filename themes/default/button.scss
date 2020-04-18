@@ -131,8 +131,10 @@ button.btn {
   }
 
   &.active {
-    transform: scale3d(1.1, 1.1, 1) !important;
-    opacity: 1 !important;
+    @media (min-width: 992px) {
+      transform: scale3d(1.1, 1.1, 1) !important;
+      opacity: 1 !important;
+    }
   }
 
   &:hover {

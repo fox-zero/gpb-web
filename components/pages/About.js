@@ -34,7 +34,7 @@ export default class extends Page {
             {headers[0]}
           </section>
           {sections}
-          <Footer/>
+          {/* <Footer/> */}
         </section>
       </Page>
     );

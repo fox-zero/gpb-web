@@ -5,11 +5,12 @@ import {VelocityTransitionGroup} from 'velocity-react';
 import {Header} from '@boilerplatejs/core/components/layout';
 import {transition} from '@boilerplatejs/core/actions/Transition';
 import {Logo} from '@fox-zero/gpb-web/components/layout';
-import {solutions} from '@fox-zero/gpb-web/data';
+import {brand} from '@fox-zero/gpb-web/data';
 
 const PROGRESS_INCREMENT = 100;
 
 @connect((state, props) => ({
+  wheels: ({ ...brand, ...state['@boilerplatejs/strapi'].Entry.posts.content }).wheels,
   slide: state['@boilerplatejs/core'].Transition.slide || props.slide || 0,
   pause: state['@boilerplatejs/core'].Transition['timer.pause'],
   initial: state['@boilerplatejs/core'].Transition['slide.initial']
@@ -28,7 +29,8 @@ export default class extends Header {
     slide: PropTypes.number.isRequired,
     initial: PropTypes.any,
     transition: PropTypes.func.isRequired,
-    images: PropTypes.array
+    images: PropTypes.array,
+    wheels: PropTypes.array
   };
 
   static defaultProps = {
@@ -159,26 +161,11 @@ export default class extends Header {
     }
   };
 
-  scrollTo = () => {
-    const OFFSET = 250;
-    const { slide, initial } = this.props;
-    const { app, parallax, section } = this.getElements();
-    const top = section.getBoundingClientRect().top - OFFSET - (initial === null ? slide * OFFSET : 0);
-
-    if (app.scrollTo) {
-      app.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-      parallax && parallax.scrollTo({ top, left: 0, behavior: 'smooth' });
-    } else {
-      app.scrollTop = 0;
-      parallax && (parallax.scrollTop = top);
-    }
-  };
-
   render() {
-    const { className, classNames, children, runOnMount, slide, images, cycle, initial: initialSlide } = this.props;
+    const { className, classNames, children, runOnMount, slide, images, cycle, wheels } = this.props;
     const { animating, previous, ready } = this.state;
     const { length } = children;
-    const initial = global.SLIDE_INITIAL || initialSlide || 0;
+    const initial = 0;
 
     const getFlipState = (direction = 'next') => {
       return {
@@ -205,15 +192,12 @@ export default class extends Header {
               </VelocityTransitionGroup>
             )}
             <div className="flippers">
-              <button {...getFlipState('previous')} onClick={this.previous} className="flip left" data-section={(solutions[!slide ? solutions.length - 1 : slide - 1]).section}>
+              <button {...getFlipState('previous')} onClick={this.previous} className="flip left" data-section={(wheels[!slide ? wheels.length - 1 : slide - 1]).wheelName}>
                 <i className="fa fa-arrow-circle-left"></i>
               </button>
-              <button {...getFlipState('next')} onClick={this.next} className="flip right" data-section={(solutions[slide === solutions.length - 1 ? 0 : slide + 1]).section}>
+              <button {...getFlipState('next')} onClick={this.next} className="flip right" data-section={(wheels[slide === wheels.length - 1 ? 0 : slide + 1]).wheelName}>
                 <i className="fa fa-arrow-circle-right"></i>
               </button>
-              <div className="scroll">
-                <button disabled={__CLIENT__ && !this.hasScroll()} onClick={this.scrollTo}><span/></button>
-              </div>
             </div>
           </div>
         ) : children}

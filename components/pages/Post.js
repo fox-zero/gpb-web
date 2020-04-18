@@ -11,15 +11,15 @@ import {open, close} from '@fox-zero/gpb-web/actions/Solution';
 import {Footer} from '@fox-zero/gpb-web/components/layout';
 import {Solution} from '@fox-zero/gpb-web/components/buttons';
 import * as modals from '@fox-zero/gpb-web/components/modals';
-import {solutions, brand} from '@fox-zero/gpb-web/data';
+import {brand} from '@fox-zero/gpb-web/data';
 import * as analytics from '@fox-zero/gpb-web/lib/analytics';
 
-const DEFAULT_SLUG = 'wheel-of-the-people';
+const DEFAULT_SLUG = brand.slug;
 
 const HEADER_TIMER = 15;
 
-const SOLUTION_DELAY = 100;
-const SOLUTION_AVG = solutions.length / 2;
+const WHEEL_BUTTON_DELAY = 100;
+const WHEEL_DEFAULT_ICON = 'pie-chart';
 
 @sync([{
   promise: ({store: {dispatch}, params: { slug = DEFAULT_SLUG }}) => dispatch(load('posts', { slug, published: true }))
@@ -32,13 +32,18 @@ const SOLUTION_AVG = solutions.length / 2;
   const content = { ...brand, ...state['@boilerplatejs/strapi'].Entry.posts.content };
   const { title, media, summary, slug = DEFAULT_SLUG, wheelConfiguration } = content;
   const image = media[0] || brand.media[0];
-  const wheels = content.wheels.map(wheel => ({
+  const wheels = content.wheels.map((wheel, i) => ({
     ...wheel,
+    title,
+    summary,
+    slug,
+    index: i,
     wheelBackgroundImage: wheel.wheelBackgroundImage || image,
     wheelConfiguration
   }));
 
   return ({
+    content,
     wheels,
     slide,
     query: state.router.location.query,
@@ -74,12 +79,14 @@ export default class extends Page {
     query: PropTypes.object,
     slide: PropTypes.number.isRequired,
     sources: PropTypes.any,
-    wheels: PropTypes.array
+    wheels: PropTypes.array,
+    content: PropTypes.object.isRequired
   };
 
   static defaultProps = {
     className: '',
     classNames: {},
+    wheels: [],
     solution: null
   };
 
@@ -98,7 +105,7 @@ export default class extends Page {
 
   componentWillMount = () => {
     const { props } = this;
-    const { transition, query } = props;
+    const { transition, query, wheels } = props;
     const { detail } = query;
 
     transition('header', 0).then(() => transition('slide', 0));
@@ -106,7 +113,7 @@ export default class extends Page {
 
     if (__CLIENT__) {
       if (detail || detail === null) {
-        this.openSolution(solutions[0]);
+        this.openSolution(wheels[0]);
       }
     }
   };
@@ -128,12 +135,15 @@ export default class extends Page {
   };
 
   get solutions() {
-    const { renderSolution } = this;
+    const { renderSolution, props } = this;
+    const { wheels } = props;
+    const { length } = wheels;
+    const median = length / 2 + (length % 2 ? 1 : 0);
 
     return (
       <section className="solutions">
-        <div className="left">{solutions.slice(0, SOLUTION_AVG).map(renderSolution(i => ({ delay: (5 - i) * SOLUTION_DELAY, from: { transform: 'translate3d(-200%, 0, 0)', opacity: 0 }, to: { transform: 'translate3d(0, 0, 0)', opacity: .8 } })))}</div>
-        <div className="right">{solutions.slice(SOLUTION_AVG).map(renderSolution(i => ({ delay: (7.5 - i) * SOLUTION_DELAY, from: { transform: 'translate3d(200%, 0, 0)', opacity: 0 }, to: { transform: 'translate3d(0, 0, 0)', opacity: .8 } })))}</div>
+        <div className="left">{wheels.slice(0, median).map(renderSolution(i => ({ delay: (5 - i) * WHEEL_BUTTON_DELAY, from: { transform: 'translate3d(-200%, 0, 0)', opacity: 0 }, to: { transform: 'translate3d(0, 0, 0)', opacity: .8 } })))}</div>
+        <div className="right">{wheels.slice(median).map(renderSolution(i => ({ delay: (7.5 - i) * WHEEL_BUTTON_DELAY, from: { transform: 'translate3d(200%, 0, 0)', opacity: 0 }, to: { transform: 'translate3d(0, 0, 0)', opacity: .8 } })))}</div>
       </section>
     );
   }
@@ -149,30 +159,30 @@ export default class extends Page {
     ) : <span/>;
   }
 
-  openSolution = async (solution, sources) => {
-    const { load, open, transition } = this.props;
-    const { slug, media } = solution;
-    (new Image()).src = media[0].url;
-    await transition('timer.pause', true);
-    open({ ...solution, ...{ sources }, ...await load('posts', { slug: encodeURIComponent(slug) }) });
+  openSolution = (wheel, sources) => {
+    const { open, transition } = this.props;
+    const { wheelBackgroundImage } = wheel;
+    (new Image()).src = wheelBackgroundImage.url;
+    transition('timer.pause', true);
+    open({ ...wheel, ...{ sources } });
   };
 
-  renderSolution = transition => (solution, i) => {
+  renderSolution = transition => (wheel, i) => {
     const { slide, sources } = this.props;
     const { ready } = this.state;
 
     return <Solution
-      className={`${ready && slide === solution.index ? 'active' : ''}`}
+      className={`${ready && slide === wheel.index ? 'active' : ''}`}
       key={`detail-button-${i}`}
-      icon={solution.icon}
-      tooltip="Click to open overlay screen"
+      icon={wheel.wheelIcon || WHEEL_DEFAULT_ICON}
+      tooltip="Click to open wheel"
       transition={transition(i)}
       onClick={() => {
-        analytics.Section.Click.track(solution.section, sources);
-        this.openSolution(solution, (sources || []).concat(['Section.App.Click']));
+        analytics.Section.Click.track(wheel.wheelName, sources);
+        this.openSolution(wheel, (sources || []).concat(['Section.App.Click']));
       }}>
         <>
-          <span>{solution.section} &bull;</span> {solution.title}
+          <span>{wheel.wheelName}</span> {wheel.wheelDek && <>&bull; {wheel.wheelDek}</>}
         </>
       </Solution>;
   }
@@ -194,7 +204,7 @@ export default class extends Page {
           <section className="section container">
             {this.header}
             {this.solutions}
-            <Footer/>
+            {/* <Footer/> */}
           </section>
           <modals.Wheel id="solution-modal" show={!!solution} solution={solution || {}} onHide={closeSolution}/>
         </Page>

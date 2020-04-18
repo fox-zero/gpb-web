@@ -329,16 +329,20 @@ section.solutions {
       &.left {
         left: 0;
 
-        .solution.active {
-          margin-left: 2em;
+        @media (min-width: 992px) {
+          .solution.active {
+            margin-left: 2em;
+          }
         }
       }
 
       &.right {
-        right: 0;
+        right: 3.5em;
 
-        .solution.active {
-          margin-left: 1em;
+        @media (min-width: 992px) {
+          .solution.active {
+            margin-left: 1.5em;
+          }
         }
       }
     }
