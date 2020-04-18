@@ -1,1 +1,1 @@
-export Solution from './Solution';
+export Wheel from './Wheel';

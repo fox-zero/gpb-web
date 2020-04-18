@@ -14,13 +14,15 @@ import * as modals from '@fox-zero/gpb-web/components/modals';
 import {solutions, brand} from '@fox-zero/gpb-web/data';
 import * as analytics from '@fox-zero/gpb-web/lib/analytics';
 
+const DEFAULT_SLUG = 'wheel-of-the-people';
+
 const HEADER_TIMER = 15;
 
 const SOLUTION_DELAY = 100;
 const SOLUTION_AVG = solutions.length / 2;
 
 @sync([{
-  promise: ({store: {dispatch}, params: { slug = 'wheel' }}) => dispatch(load('posts', { slug, published: true }))
+  promise: ({store: {dispatch}, params: { slug = DEFAULT_SLUG }}) => dispatch(load('posts', { slug, published: true }))
 }])
 
 @connect(state => {
@@ -28,10 +30,16 @@ const SOLUTION_AVG = solutions.length / 2;
   const { slide = 0 } = Transition;
   const { current: solution = null } = state['@fox-zero/gpb-web'].Solution;
   const content = { ...brand, ...state['@boilerplatejs/strapi'].Entry.posts.content };
-  const { title, media, summary, slug = 'wheel' } = content;
-  const image = media[0] ? media[0].url : brand.media[0].url;
+  const { title, media, summary, slug = DEFAULT_SLUG, wheelConfiguration } = content;
+  const image = media[0] || brand.media[0];
+  const wheels = content.wheels.map(wheel => ({
+    ...wheel,
+    wheelBackgroundImage: wheel.wheelBackgroundImage || image,
+    wheelConfiguration
+  }));
 
   return ({
+    wheels,
     slide,
     query: state.router.location.query,
     sources: state['@boilerplatejs/core'].Transition['analytics.sources'],
@@ -41,15 +49,15 @@ const SOLUTION_AVG = solutions.length / 2;
     meta: [
       {name: 'description', content: title},
       {property: 'og:type', content: 'article'},
-      {property: 'og:url', content: `https://grandpoobear.foxzero.io${slug === 'wheel' ? '' : `/post/${slug}`}`},
+      {property: 'og:url', content: `https://grandpoobear.foxzero.io${slug === DEFAULT_SLUG ? '' : `/post/${slug}`}`},
       {property: 'og:title', content: title},
       {property: 'og:description', content: summary},
-      {property: 'og:image:secure_url', content: image},
-      {property: 'og:image', content: image},
+      {property: 'og:image:secure_url', content: image.url},
+      {property: 'og:image', content: image.url},
       {property: 'twitter:card', content: 'article'},
       {property: 'twitter:title', content: title},
       {property: 'twitter:description', content: summary},
-      {property: 'twitter:image', content: image}
+      {property: 'twitter:image', content: image.url}
     ]
   });
 }, {transition, dismiss, open, close})
@@ -65,7 +73,8 @@ export default class extends Page {
     recaptchaSiteKey: PropTypes.any,
     query: PropTypes.object,
     slide: PropTypes.number.isRequired,
-    sources: PropTypes.any
+    sources: PropTypes.any,
+    wheels: PropTypes.array
   };
 
   static defaultProps = {
@@ -187,7 +196,7 @@ export default class extends Page {
             {this.solutions}
             <Footer/>
           </section>
-          <modals.Solution id="solution-modal" show={!!solution} solution={solution || {}} onHide={closeSolution}/>
+          <modals.Wheel id="solution-modal" show={!!solution} solution={solution || {}} onHide={closeSolution}/>
         </Page>
     );
   }
