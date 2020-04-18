@@ -1,3 +1,4 @@
+export Post from './Post';
 export Home from './Home';
 export Consulting from './Consulting';
 export Development from './Development';

@@ -1,3 +1,4 @@
+export Post from './Post';
 export Title from './Home';
 export About from './About';
 export Contact from './Contact';

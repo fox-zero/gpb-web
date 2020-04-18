@@ -4,44 +4,6 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://foxzero.io</loc>
-    <image:image>
-      <image:loc>https://foxzero.io/@fox-zero/gpb-web/images/logo.png</image:loc>
-      <image:title>Fox Zero · Zero Latency Software Consultancy™</image:title>
-      <image:caption>Our software consulting and digital agency services combine zero-latency development tactics with versatile talent as simple monthly subscriptions to enhance project accuracy and morale, reducing complexity and waste.</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://foxzero.io/consulting</loc>
-  </url>
-  <url>
-    <loc>https://foxzero.io/development</loc>
-  </url>
-  <url>
-    <loc>https://foxzero.io/portfolio</loc>
-  </url>
-  <url>
-    <loc>https://foxzero.io/strategy</loc>
-  </url>
-  <url>
-    <loc>https://foxzero.io/warranty</loc>
-  </url>
-  <url>
-    <loc>https://foxzero.io/subscription</loc>
-  </url>
-  <url>
-    <loc>https://foxzero.io/on-demand</loc>
-  </url>
-  <url>
-    <loc>https://foxzero.io/maintenance</loc>
-  </url>
-  <url>
-    <loc>https://foxzero.io/contact</loc>
-  </url>
-  <url>
-    <loc>https://foxzero.io/about</loc>
-  </url>
-  <url>
-    <loc>https://foxzero.io/privacy</loc>
+    <loc>https://grandpoobear.foxzero.io</loc>
   </url>
 </urlset>
