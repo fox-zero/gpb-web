@@ -24,14 +24,6 @@ body {
     overflow-x: hidden;
     height: 100vh;
 
-    &.home {
-        overflow: hidden;
-
-        @media print {
-            overflow: visible;
-        }
-    }
-
     &.scroll-lock {
         pointer-events: none;
 

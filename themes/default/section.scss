@@ -10,22 +10,6 @@
     min-height: $page-height-xl!important;
   }
 
-  .no-js .home.page & {
-    overflow: hidden;
-
-    @media print {
-      overflow: visible;
-    }
-
-    .section {
-      display: none;
-
-      @media print {
-          display: block;
-      }
-    }
-  }
-
   .about.page & .section {
     padding: 3em 0;
   }

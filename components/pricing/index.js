@@ -1,2 +1,0 @@
-
-export Subscription from './Subscription';

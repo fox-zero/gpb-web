@@ -14,23 +14,6 @@ footer {
   box-shadow: 0 -1px 10px rgba(41, 41, 41,.5);
   text-shadow: -1px 1px 1px $black-color;
 
-  .home.page & {
-    bottom: 0;
-    position: absolute;
-    width: 100%;
-  }
-
-  .home.about.page & {
-    bottom: auto;
-    position: relative;
-    width: auto;
-  }
-
-  .no-js .home.page & {
-    opacity: 0 !important;
-    pointer-events: none;
-  }
-
   &:before, &:after {
     content: '';
     position: absolute;
