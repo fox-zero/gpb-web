@@ -1,0 +1,354 @@
+.modal-backdrop {
+  background: rgba(32,173,228, .65);
+}
+
+.modal {
+  display: block;
+  padding-left: 0 !important;
+  overflow: hidden !important;
+
+  &.fade {
+    opacity: 1;
+  }
+
+  &.fade .modal-dialog {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    -ms-transform: translate3d(-100%, 0, 0);
+    -o-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  &.in .modal-dialog {
+    -webkit-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  .modal-hero {
+    opacity: 1;
+    transition: opacity .25s;
+    background: no-repeat center;
+    background-size: cover;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    @media only screen and (min-width: 768px) {
+      opacity: 0;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: $background-color;
+      opacity: .85;
+    }
+  }
+
+  &.ready .modal-hero {
+    opacity: 1;
+  }
+
+  .modal-dialog {
+    margin: 0;
+    width: 90%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-shadow: 0px 0 10px rgba(21,21,21, 0.85);
+    -webkit-transition: -webkit-transform 0.25s ease-out !important;
+    -moz-transition: -moz-transform 0.25s ease-out !important;
+    -o-transition: -o-transform 0.25s ease-out !important;
+    transition: transform 0.25s ease-out !important;
+    // height: auto;
+    // min-height: 100;
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      z-index: 1;
+      background: linear-gradient($background-color, rgba(41, 41, 41, 0));
+      height: 100%;
+      top: 0;
+    }
+  }
+
+  .modal-content {
+    z-index: 2;
+    background: $background-color;
+    border-radius: 0;
+    border: none;
+    min-height: 100%;
+    opacity: .95;
+  }
+
+  .modal-nav {
+    height: 40px;
+    background: $black-color;
+    opacity: .95;
+    box-shadow: 0 0 .5em $black-color;
+    font-size: 1.5em;
+
+    i {
+      width: 20px;
+      line-height: 40px;
+      color: $white-color;
+      opacity: .85;
+      transition: opacity .25s;
+      text-align: center;
+
+      &:hover {
+          opacity: 1;
+      }
+    }
+
+    .share, .dismiss {
+      position: relative;
+      padding: 0 .5em;
+
+      &:after {
+        font-family: $font-family-brand;
+        left: 100%;
+        position: absolute;
+        white-space: nowrap;
+        color: $humility;
+        background: $background-color;
+        border-radius: .25em;
+        padding: 0 .5em;
+        margin: -1em -.25em 0;
+        font-size: .65em;
+        line-height: 2em;
+        top: 50%;
+      }
+    }
+
+    .dismiss {
+      outline: 0;
+      float: left;
+      background: none;
+      border: none;
+
+      &:after {
+        content: 'close';
+      }
+
+      @media only screen and (min-width: 992px) {
+        &:before {
+          content: '[ESC]';
+          font-family: $font-family-brand;
+          right: -8em;
+          position: absolute;
+          white-space: nowrap;
+          color: $humility;
+          opacity: .65;
+          background: $background-color;
+          border-radius: .25em;
+          padding: 0 .5em;
+          margin: -1em -.25em 0;
+          font-size: .5em;
+          font-weight: bold;
+          line-height: 2em;
+          top: 50%;
+        }
+      }
+    }
+
+    .share {
+      float: right;
+      padding: 0 .75em;
+
+      > div {
+        display: inline-block;
+        outline: none;
+
+        & + div {
+          margin-left: .5em;
+        }
+      }
+
+      &:after {
+        content: 'share';
+        left: auto;
+        right: 100%;
+      }
+    }
+  }
+
+  .logo {
+    text-align: center !important;
+  }
+
+  .modal-body,
+  .modal-header {
+    margin: auto;
+    max-width: 640px;
+  }
+
+  .modal-header {
+    padding: 0;
+    position: relative;
+  }
+
+  .modal-title {
+    line-height: 1;
+    color: $primary-green-color;
+    font-size: 2em;
+    text-transform: uppercase;
+    font-family: $font-family-oswald;
+    letter-spacing: -1px;
+    padding: 2.75em 20px 0;
+    display: table;
+    text-align: left;
+    max-width: 640px;
+
+    div, span {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    div {
+      background: $primary-green-color;
+      position: relative;
+
+      &:before {
+        content: attr(data-dek);
+        font-size: .95em;
+        position: absolute;
+        bottom: 100%;
+        margin-bottom: 7px;
+        color: $white-color;
+        white-space: nowrap;
+      }
+    }
+
+    div:before, span {
+      text-shadow: 1px 1px 3px $black-color;
+      font-weight: 600;
+    }
+
+    span {
+      padding-left: 10px;
+      font-size: 1.35em;
+    }
+
+    i {
+      background-color: $primary-green-color;
+      color: $black-color;
+      padding: .25em 15px;
+      font-size: 1.5em;
+    }
+  }
+
+  .modal-body {
+    color: $white-color;
+    padding: 45px 0;
+    margin: 0 auto;
+    font-size: 1em;
+    text-shadow: 1px 1px 3px $black-color;
+
+    h2, h3, h4 {
+      text-shadow: 0 2px 1px $black-color;
+    }
+
+    p {
+      font-size: 1.25em;
+    }
+  }
+
+  .modal-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: $humility;
+    font-size: .85em;
+    text-align: center;
+  }
+
+  .modal-header,
+  .modal-footer {
+    border: none;
+  }
+
+  &.contact .modal-body {
+    padding-top: 30px;
+  }
+}
+
+.solution.modal {
+  .modal-title {
+    h3 {
+      text-align: center;
+      font-size: 2em !important;
+      font-family: $font-family-oswald;
+      margin: .25em auto;
+      text-transform: uppercase;
+    }
+  }
+
+  .content {
+    padding: 0 20px 30px;
+
+    h4 {
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      text-shadow: 1px 1px 3px #151515;
+      color: #f8f8f8;
+      line-height: 1;
+      font-family: $font-family-oswald;
+      text-transform: uppercase;
+      font-size: 3em;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    p + p,
+    p + img,
+    img + p {
+      margin-top: 1.5em !important;
+    }
+
+    img {
+      display: block;
+      width: 75%;
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .subscription {
+      margin-top: 30px;
+      padding: 0;
+    }
+  }
+
+  .quote {
+    padding: 45px 0;
+
+    h2, h3, p {
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+    }
+
+    > div:first-child {
+      font-size: .9em;
+
+      p {
+        padding: 2em 0;
+        margin-top: -2em !important;
+      }
+    }
+
+    .form {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+  }
+}

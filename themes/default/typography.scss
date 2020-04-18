@@ -1,0 +1,52 @@
+// @import "../../node_modules/@fox-zero/gpb-web/static/fonts/NikeCombatStencil/NikeCombatStencil.css";
+
+body {
+  font-size: 12px;
+
+  @media (min-width: 360px) {
+    font-size: 13px;
+  }
+
+  @media only screen
+    and (min-device-width : 375px)
+    and (max-device-width : 667px)
+    and (orientation : portrait) {
+    font-size: 12px;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 14.5px;
+  }
+}
+
+h1, h2, h3 {
+  font-family: $font-family-brand;
+}
+
+.color-primary-yellow {
+  color: $primary-yellow-color;
+}
+
+.color-primary-green {
+  color: $primary-green-color;
+}
+
+.color-secondary-green {
+  color: $secondary-green-color;
+}
+
+.color-primary-blue {
+  color: $primary-blue-color;
+}
+
+.color-secondary-blue {
+  color: $secondary-blue-color;
+}
+
+.color-secondary-red {
+  color: $secondary-red-color;
+}
+
+.humility {
+  color: $humility;
+}

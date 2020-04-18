@@ -1,0 +1,10 @@
+.vscode
+.history
+.idea/
+node_modules/
+package-lock.json
+*.iml
+npm-debug.log
+jsconfig.json
+export.tar
+export/

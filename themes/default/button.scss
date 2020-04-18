@@ -1,0 +1,215 @@
+@keyframes rotate-icon {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+button {
+  @media print {
+    display: none !important;
+  }
+}
+
+button.btn {
+  font-family: $font-family-oswald;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 0;
+  transition: all 150ms;
+  box-shadow: 1px 1px 2px #000;
+  line-height: 1.5em;
+  outline: 0;
+
+  & + .btn {
+    margin-left: .5em;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &.btn-success {
+    font-size: 1.35em;
+    background: $black-color;
+    position: relative;
+
+    &, & a {
+      color: $primary-yellow-color;
+      text-decoration: none;
+    }
+
+    span, a, i {
+      display: table-cell;
+    }
+
+    i {
+      opacity: .85;
+      padding-left: 5px;
+      text-align: center;
+      width: 1em;
+      font-size: 75%;
+      vertical-align: middle;
+    }
+
+    &:hover, &:active, &:focus {
+      background: $secondary-green-color;
+      color: $black-color;
+
+      &, & a {
+        color: $black-color;
+      }
+    }
+
+    &[disabled] {
+      &:before {
+        position: absolute;
+        content: attr(data-status);
+        top: 0;
+        left: 0;
+        font-size: .65em;
+        color: $black-color;
+        margin-top: -15px;
+        margin-left: -15px;
+        font-family: $font-family-sans-serif;
+        text-transform: none;
+        background: $primary-green-color;
+        border-radius: 5px;
+        display: block;
+        padding: 2px 10px;
+        font-weight: bold;
+      }
+
+      &:hover, &:active, &:focus {
+        background: $black-color;
+
+        &, & a {
+          color: $primary-yellow-color;
+        }
+      }
+
+      i:before {
+        animation-name: rotate-icon;
+        animation-iteration-count: infinite;
+        animation-duration: 2.5s;
+        animation-timing-function: linear;
+        display: inline-block;
+      }
+    }
+  }
+
+  &.btn-danger {
+    font-size: 1em;
+
+    &:hover, &:active {
+      background: $primary-yellow-color;
+      color: $black-color;
+    }
+
+    &, &[disabled] {
+      background: $black-color;
+      color: $humility;
+    }
+  }
+}
+
+.solution.button {
+  box-shadow: 1px 1px 2px #000;
+  display: table;
+  line-height: 1.5em;
+  background: $black-color;
+  color: $primary-green-color;
+
+  @media print {
+    display: none;
+  }
+
+  @media (min-width: 769px) {
+    transition: all .25s;
+  }
+
+  &.active {
+    transform: scale3d(1.1, 1.1, 1) !important;
+    opacity: 1 !important;
+  }
+
+  &:hover {
+    opacity: 1 !important;
+
+    span {
+      color: $background-color !important;
+
+      span {
+        font-weight: 600;
+        color: $black-color !important;
+      }
+    }
+  }
+
+  i, button {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  button {
+    background: none;
+    outline: none;
+    border: none;
+    text-align: left;
+    padding: .5em 1em;
+    width: 100%;
+    min-height: 4em;
+    font-size: 16px;
+    line-height: 1.25;
+    position: relative;
+
+    &:after {
+      content: '';
+      transition: width .25s;
+      position: absolute;
+      width: 0;
+      top: 0;
+      left: 0;
+      background: $primary-green-color;
+      height: 100%;
+      z-index: 1;
+    }
+
+    > span {
+      font-size: 1.1em;
+      position: relative;
+      z-index: 2;
+      font-family: $font-family-fjalla;
+      text-transform: uppercase;
+
+      span {
+        color: $white-color;
+      }
+    }
+  }
+
+  &:hover {
+    button:after {
+      width: 100%;
+    }
+  }
+
+  i {
+    color: $black-color;
+    background: $primary-green-color;
+    font-size: 1.5em;
+    padding: .5em;
+    box-shadow: 0 0 .5em $black-color;
+    text-align: center;
+    width: 2.5em;
+    position: relative;
+    z-index: 3;
+
+    &:before {
+      width: 1.5em;
+      display: inline-block;
+    }
+  }
+}

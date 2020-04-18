@@ -1,0 +1,20 @@
+{
+  "name": "@fox-zero/gpb-web",
+  "version": "1.0.0-pre.1",
+  "scripts": {
+    "lint": "boilerplate lint --bundle $(pwd)",
+    "mount": "boilerplate mount --bundle $(pwd)",
+    "save": "boilerplate save --bundle $(pwd)",
+    "delete": "boilerplate delete --bundle $npm_package_name",
+    "postinstall": "boilerplate install --bundle $npm_package_name && npm run upgrade",
+    "uninstall": "boilerplate uninstall --bundle $npm_package_name",
+    "upgrade": "boilerplate migrate up --bundle $npm_package_name",
+    "downgrade": "boilerplate migrate down --bundle $npm_package_name"
+  },
+  "author": "Peter C. Romano <pete@vitruvian.tech> (http://github.com/fox-zero)",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "react-bootstrap-modal": "^4.1.1",
+    "react-share": "^1.19.1"
+  }
+}

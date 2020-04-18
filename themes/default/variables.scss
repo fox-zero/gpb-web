@@ -1,0 +1,48 @@
+/**
+ *  Define scss variables here.
+ *
+ *  Available options for Bootstrap:
+ *  http://getbootstrap.com/customize/
+ *
+ */
+
+$text-color: #333;
+$background-color: #292929;
+$black-color: #151515;
+$white-color: #f8f8f8;
+$cyan: #33e0ff;
+$humility: #c0c0c0;
+$gray: #d0d0d0;
+
+// Yellow
+$primary-yellow-color: #FBAA19;
+
+// Green
+$primary-green-color: #99CA3E;
+$secondary-green-color: #7CBC42;
+
+// Blue
+$primary-blue-color: #789ba8;
+$secondary-blue-color: #599FC6;
+
+// Red
+$primary-red-color: #E25517;
+$secondary-red-color: #D87844;
+
+// Bootstrap Variables
+$brand-primary: darken(#428bca, 6.5%);
+$brand-secondary: #e25139;
+$brand-success: #5cb85c;
+$brand-warning: #f0ad4e;
+$brand-danger: #d9534f;
+$brand-info: #5bc0de;
+
+$font-size-base: 14px;
+$font-family-sans-serif: "Helvetica Neue", Helvetica, sans-serif;
+$font-family-brand: $font-family-sans-serif;
+$font-family-fjalla: 'Fjalla One', $font-family-brand;
+$font-family-oswald: $font-family-fjalla;
+
+$page-max-width: 970px;
+$page-height: 100vh;
+$page-height-xl: 100vh;

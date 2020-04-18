@@ -1,0 +1,67 @@
+@keyframes rotate-tagline {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.home.page .logo  {
+  @media (max-width: 991px) and (orientation: landscape) {
+    display: none;
+  }
+
+  @media print {
+    display: block !important;
+  }
+}
+
+.home.page .footer .logo {
+  display: block;
+}
+
+.modal .logo, .page .logo {
+  &, .tagline {
+    text-align: center;
+    padding: 7em 0 15px;
+  }
+
+  > img {
+    width: 8.5em;
+    position: relative;
+  }
+
+  .graphic {
+    margin: auto -5px;
+    z-index: 1;
+  }
+
+  .tagline {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+
+    img {
+      width: 14em;
+      margin: -2.75em 0;
+      animation-name: rotate-tagline;
+      animation-iteration-count: infinite;
+      animation-duration: 25s;
+      animation-timing-function: linear;
+    }
+  }
+}
+
+.modal .logo {
+  padding-top: 3.75em;
+
+  .tagline img {
+    margin: -6em 0 !important;
+  }
+}
+
+.footer .logo {
+  padding: 0;
+}
