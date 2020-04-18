@@ -6,7 +6,7 @@ export default class {
 
     await Page.update({
       page: '@fox-zero/gpb-web:Post',
-      headers: '["@fox-zero/gpb-web:Post"]',
+      headers: '["@fox-zero/gpb-web:Wheel"]',
       sections: '[]',
       title: null
     }, {
@@ -17,7 +17,7 @@ export default class {
 
     await Page.create({
       page: '@fox-zero/gpb-web:Post',
-      headers: '["@fox-zero/gpb-web:Post"]',
+      headers: '["@fox-zero/gpb-web:Wheel"]',
       sections: '[]',
       route: 'post/:slug'
     });
