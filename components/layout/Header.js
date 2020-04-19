@@ -10,7 +10,7 @@ import {brand} from '@fox-zero/gpb-web/data';
 const PROGRESS_INCREMENT = 100;
 
 @connect((state, props) => ({
-  wheels: ({ ...brand, ...state['@boilerplatejs/strapi'].Entry.posts.content }).wheels,
+  wheels: ({ ...brand, ...state['@boilerplatejs/strapi'].Entry.posts.content }).wheels.filter(wheel => wheel.wheelSegments.length),
   slide: state['@boilerplatejs/core'].Transition.slide || props.slide || 0,
   pause: state['@boilerplatejs/core'].Transition['timer.pause'],
   initial: state['@boilerplatejs/core'].Transition['slide.initial']
@@ -191,14 +191,14 @@ export default class extends Header {
                 {children[slide]}
               </VelocityTransitionGroup>
             )}
-            <div className="flippers">
+            {wheels.length > 1 && <div className="flippers">
               <button {...getFlipState('previous')} onClick={this.previous} className="flip left" data-section={(wheels[!slide ? wheels.length - 1 : slide - 1]).wheelName}>
                 <i className="fa fa-arrow-circle-left"></i>
               </button>
               <button {...getFlipState('next')} onClick={this.next} className="flip right" data-section={(wheels[slide === wheels.length - 1 ? 0 : slide + 1]).wheelName}>
                 <i className="fa fa-arrow-circle-right"></i>
               </button>
-            </div>
+            </div>}
           </div>
         ) : children}
       </Header>
