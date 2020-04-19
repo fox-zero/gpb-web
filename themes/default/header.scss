@@ -44,7 +44,7 @@
   display: block !important;
 
   &.animating {
-    h1, h2, .preview, .flippers button {
+    h1, h2, .preview, .flippers button, .powered-by {
       opacity: 0;
       transform: translate3d(-200vw, 0, 0);
     }
@@ -104,8 +104,12 @@
     transition: opacity .35s, transform .35s;
   }
 
-  h1, h2, .preview, .flippers button {
+  h1, h2, .preview, .flippers button, .powered-by {
     transition: opacity 1s, transform .25s;
+  }
+
+  .powered-by {
+    bottom: 30px;
   }
 
   > div:last-of-type {
@@ -115,7 +119,7 @@
     transform: translate(0, 50%);
 
     @media (min-width: 992px) {
-      bottom: 45%;
+      bottom: 42%;
     }
   }
 

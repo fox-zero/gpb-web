@@ -33,4 +33,33 @@ body {
     }
 }
 
+.powered-by {
+    position: absolute;
+    width: 100%;
+    color: $white-color;
+    font-size: 1.25em;
+    font-style: italic;
+    font-family: $font-family-fjalla;
+    display: none;
+    text-align: center;
+
+    @media (min-width: 992px) {
+        display: block;
+    }
+
+    span {
+        display: block;
+        margin: 10px 0;
+    }
+
+    i {
+        display: inline-block;
+        margin: 0 10px;
+    }
+
+    img {
+        width: 6em;
+    }
+}
+
 .grecaptcha-badge { display: none; }

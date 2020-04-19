@@ -58,6 +58,14 @@ export default class extends Component {
             </TwitterShareButton>
           </div>}
         </div>
+        <div className="powered-by">
+          <span>Powered by</span>
+          <span>
+            <img src="https://d3w33imimg0eu8.cloudfront.net/images/logo.png" alt="Fox Zero™ · Zero Latency Software Consultancy™" />
+            <i className="fa fa-plus"></i>
+            <img src="https://s3-us-west-2.amazonaws.com/content-gpb.foxzero.io/assets/images/redbull.png" />
+          </span>
+        </div>
         <Modal.Header>
           {title && <Modal.Title>
             {icon && <div data-dek={dek}><i className={`fa fa-${icon}`}></i></div>}<span>{title}</span>
