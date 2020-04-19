@@ -11,7 +11,7 @@ import * as analytics from '@fox-zero/gpb-web/lib/analytics';
   const content = { ...brand, ...state['@boilerplatejs/strapi'].Entry.posts.content };
   const { media, wheelConfiguration, title, slug, summary } = content;
   const image = media[0] || brand.media[0];
-  const wheels = content.wheels.filter(wheel => wheel.wheelSegments.length).map((wheel, i) => ({
+  const wheels = content.wheels.filter(wheel => wheel.wheelSegments.length > 1).map((wheel, i) => ({
     ...wheel,
     title,
     slug,

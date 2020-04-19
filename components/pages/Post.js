@@ -32,7 +32,7 @@ const WHEEL_DEFAULT_ICON = 'pie-chart';
   const content = { ...brand, ...state['@boilerplatejs/strapi'].Entry.posts.content };
   const { title, media, summary, slug = DEFAULT_SLUG, wheelConfiguration } = content;
   const image = media[0] || brand.media[0];
-  const wheels = content.wheels.filter(wheel => wheel.wheelSegments.length).map((wheel, i) => ({
+  const wheels = content.wheels.filter(wheel => wheel.wheelSegments.length > 1).map((wheel, i) => ({
     ...wheel,
     title,
     summary,
@@ -127,7 +127,7 @@ export default class extends Page {
   }
 
   cycleHeader = (timer = HEADER_TIMER) => {
-    const { transition, wheels: length } = this.props;
+    const { transition, wheels: { length } } = this.props;
 
     if (__CLIENT__) {
       transition('timer', length > 1 ? timer : 0);

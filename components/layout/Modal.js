@@ -53,18 +53,12 @@ export default class extends Component {
             <i className="fa fa-arrow-circle-left"></i>
           </Modal.Dismiss>
           {url && <div className="share">
-            <LinkedinShareButton url={url} title={title} source="Fox Zero™" summary={caption}>
-              <i className="fa fa-linkedin-square"/>
-            </LinkedinShareButton>
             <FacebookShareButton url={url} quote={caption} hashtag={hashtags.map(tag => `#${tag}`).join(',')}>
               <i className="fa fa-facebook-official"/>
             </FacebookShareButton>
-            <TwitterShareButton url={url} title={caption} hashtags={share.hashtags} related="@fox_zero_agency">
+            <TwitterShareButton url={url} title={caption} hashtags={share.hashtags} related="@grandpoobear">
               <i className="fa fa-twitter"/>
             </TwitterShareButton>
-            <EmailShareButton url={url} subject={`Fox Zero™ · ${subject}`} body={`${caption}\n\nRead More: ${url}\n\n`}>
-              <i className="fa fa-envelope"/>
-            </EmailShareButton>
           </div>}
         </div>
         <Modal.Header>

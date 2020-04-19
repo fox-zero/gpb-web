@@ -10,7 +10,7 @@ import {brand} from '@fox-zero/gpb-web/data';
 const PROGRESS_INCREMENT = 100;
 
 @connect((state, props) => ({
-  wheels: ({ ...brand, ...state['@boilerplatejs/strapi'].Entry.posts.content }).wheels.filter(wheel => wheel.wheelSegments.length),
+  wheels: ({ ...brand, ...state['@boilerplatejs/strapi'].Entry.posts.content }).wheels.filter(wheel => wheel.wheelSegments.length > 1),
   slide: state['@boilerplatejs/core'].Transition.slide || props.slide || 0,
   pause: state['@boilerplatejs/core'].Transition['timer.pause'],
   initial: state['@boilerplatejs/core'].Transition['slide.initial']

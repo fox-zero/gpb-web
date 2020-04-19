@@ -51,7 +51,7 @@ export default class extends Page {
         <section className="section container">
           {sections}
         </section>
-        <Footer/>
+        {/* <Footer/> */}
       </Page>
     );
   }

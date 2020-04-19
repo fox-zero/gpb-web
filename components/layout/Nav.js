@@ -29,12 +29,6 @@ export default class extends Nav {
         <nav>
           <a href="#" className="toggle" role="button" onClick={preventDefault}/>
           <div className="social">
-            <a title="LinkedIn: Fox Zero™" href="https://www.linkedin.com/company/fox-zero" target="_blank">
-              <i className="fa fa-linkedin-square"/>
-            </a>
-            <a title="GitHub: Fox Zero™" href="https://www.github.com/fox-zero" target="_blank">
-              <i className="fa fa-github"/>
-            </a>
             <a title="Facebook: @fox.zero.agency" href="https://www.facebook.com/fox.zero.agency" target="_blank">
               <i className="fa fa-facebook-official"/>
             </a>
@@ -54,9 +48,9 @@ export default class extends Nav {
                 <i className="fa fa-pie-chart"/> Wheel of the People
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/contact"><i className="fa fa-envelope"/> Contact Us</Link>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </section>
