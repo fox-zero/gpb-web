@@ -1,15 +1,12 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import Modal from 'react-bootstrap-modal';
-import {Logo} from '@fox-zero/gpb-web/components/layout';
 import {ShareButtons} from 'react-share';
 import _ from 'lodash';
 
 const {
   FacebookShareButton,
-  TwitterShareButton,
-  EmailShareButton,
-  LinkedinShareButton
+  TwitterShareButton
 } = ShareButtons;
 
 export default class extends Component {
@@ -62,7 +59,6 @@ export default class extends Component {
           </div>}
         </div>
         <Modal.Header>
-          <Logo/>
           {title && <Modal.Title>
             {icon && <div data-dek={dek}><i className={`fa fa-${icon}`}></i></div>}<span>{title}</span>
           </Modal.Title>}

@@ -2,13 +2,7 @@
   visibility: hidden;
 }
 .peg {
-  transform: matrix(1, 0, 0, 1, 473, 35)!important;
-}
-.wheelContainer{
-width: 100%;
-height: 100%;
-margin: 0;
-padding: 0;
+  // transform: matrix(1, 0, 0, 1, 367, -72)!important;
 }
 
 //    a:link { color:#F1DC16; }
@@ -22,27 +16,31 @@ pointer-events: none;
 .toast, .wheelContainer{
 text-align: center;
 }
-.wheelContainer {
-transform: translate(-50%, 0);
-}
 .toast {
-position: absolute;
-background-color: #E81D62;
-max-width: 30vw;
-min-width: 15vw;
-}
-.wheelContainer {
-position: absolute;
-max-width: 1000px;
-margin-left: auto;
-margin-right: auto;
-left: 50%;
-top: 100%;
-margin: -3.5em auto;
+  position: absolute;
+  background-color: #E81D62;
+  top: 26vh;
+  font-size: 2em;
+  padding: 15px 30px;
+  line-height: 1;
+  white-space: nowrap;
+  border-radius: 12px;
+  opacity: 0;
+
+  @media (min-width: 992px) {
+    top: 23vh;
+    font-size: 3.5em;
+  }
+
+  p {
+    line-height: 1;
+    font-family: 'Fjalla One', Arial, sand-serif;;
+    color: #ededed;
+  }
 }
 .wheelSVG {
 position: absolute;
-overflow: visible;
+overflow: visible!important;
 width: 100%;
 height: auto; 
 }
@@ -52,48 +50,28 @@ font-family: 'Fjalla One', Arial, sans-serif;
 -webkit-user-select: none;
 user-select: none;
 }
-.toast {
-border-radius: 12px;
-opacity: 0;
-}
-.toast p {
-clear: both;
-font-family: 'Fjalla One', Arial, sand-serif;
-margin: 23px;
-font-size: 30px;
-color: #ededed;
-letter-spacing: 0;
--webkit-touch-callout: none;
--webkit-user-select: none;
--khtml-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
-line-height: 32px;
--webkit-transition: line-height .2s ease;
-transition: line-height .2s ease;
-}
-@media only screen and (max-width: 480px) {
-.toast p, .toast span {
-  font-size: 18px;
-  line-height: 18px;
-}
-}
-@media only screen and (min-width: 481px) and (max-width: 800px) {
-.toast p, .toast span {
-  font-size: 38px;
-  line-height: 38px;
-}
-}
-@media only screen and (min-width: 801px) {
-.toast p, .toast span {
-  font-size: 58px;
-  line-height: 60px;
-}
-}
 .spinBtn {
   cursor: pointer;
 }
 .spinBtn:focus {
 outline: 0;
+}
+.spin.btn {
+  i {
+    padding-left: 0;
+    padding-right: 5px;
+  }
+
+  span span {
+    display: inline;
+    color: $white-color;
+  }
+}
+.spin-container {
+  position: fixed;
+  bottom: 10%;
+  width: 100%;
+  left: 0;
+  text-align: center;
+  font-size: 1.25em;
 }

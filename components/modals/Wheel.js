@@ -29,11 +29,11 @@ export default class extends Modal {
           onGameEnd: () => {},
           spinTrigger: document.querySelector('.spin'),
           data: {
-            svgWidth: 1024,
-            svgHeight: 768,
-            centerX: 512,
-            centerY: 384,
-            wheelSize: 620,
+            svgWidth: 800,
+            svgHeight: 640,
+            centerX: 400,
+            centerY: 285,
+            wheelSize: 560,
             clickToSpin: true,
             ...wheelConfiguration,
             segmentValuesArray: wheelSegments.map(({
@@ -77,10 +77,6 @@ export default class extends Modal {
         share={share}
         hero={wheelBackgroundImage.url}>
         {wheelName && <section className="content">
-          <button className={`spin btn btn-success`}>
-            <i className="fa fa-hand-o-right"></i>
-            <span>Spin <span>for the People</span></span>
-          </button>
           <div className="wheelContainer">
             <svg className="wheelSVG" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" textRendering="optimizeSpeed">
               <defs>
@@ -103,11 +99,17 @@ export default class extends Modal {
                 <path className="peg" fill="#EEEEEE" d="M22.139,0C5.623,0-1.523,15.572,0.269,27.037c3.392,21.707,21.87,42.232,21.87,42.232  s18.478-20.525,21.87-42.232C45.801,15.572,38.623,0,22.139,0z" />
               </g>
               <g className="valueContainer" />
-              <image xlinkHref="https://s3-us-west-2.amazonaws.com/content-gpb.foxzero.io/assets/images/logo.png" width="150" height="150" x="438" y="310" />
+              <image xlinkHref="https://s3-us-west-2.amazonaws.com/content-gpb.foxzero.io/assets/images/logo.png" width="200" height="200" x="300" y="187" />
             </svg>
             <div className="toast">
               <p />
             </div>
+          </div>
+          <div className="spin-container">
+            <button className="spin btn btn-success">
+              <i className="fa fa-hand-o-right" />
+              <span>Spin <span>for the People</span></span>
+            </button>
           </div>
         </section>}
       </Modal>
