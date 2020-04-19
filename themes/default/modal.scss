@@ -266,6 +266,10 @@
     color: $humility;
     font-size: .85em;
     text-align: center;
+
+    a {
+      color: $white-color;
+    }
   }
 
   .modal-header,

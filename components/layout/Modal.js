@@ -65,7 +65,7 @@ export default class extends Component {
         </Modal.Header>
         <Modal.Body>{children}</Modal.Body>
         <Modal.Footer>
-          <span>&copy; {(new Date()).getFullYear()} · Fox Zero · A <a href="https://vitruviantech.com">VitruvianTech</a> Brand</span>
+          <span>&copy; {(new Date()).getFullYear()} · Grand POOBear · Powered by <a href="https://foxzoero.io">Fox Zero™</a></span>
         </Modal.Footer>
       </Modal>
     );

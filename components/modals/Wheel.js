@@ -61,7 +61,7 @@ export default class extends Modal {
     const { wheelName, slug, summary, title, subject, wheelIcon = 'pie-chart', wheelBackgroundImage = {} } = wheel;
     const { location = {} } = global;
     const share = {
-      url: `${location.protocol}//${location.host}/${(slug || '').toLowerCase()}`,
+      url: `${location.protocol}//${location.host}${slug ? `/post/${slug.toLowerCase()}` : ''}`,
       caption: summary,
       subject: wheelName ? `${wheelName} · ${subject || title}` : subject || title,
       hashtags: ['smm2', 'nintendo', 'redbull', 'speedrun']

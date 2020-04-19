@@ -39,7 +39,7 @@ export default class extends Nav {
               <i className="fa fa-instagram"/>
             </a>
           </div>
-          <ul data-copyright={`© ${(new Date()).getFullYear()} · Fox Zero · A VitruvianTech Brand`}>
+          <ul data-copyright={`© ${(new Date()).getFullYear()} · Grand POOBear`}>
             <li className="home">
               <Link rel="nofollow" to="/" className="logo"/>
             </li>

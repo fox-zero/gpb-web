@@ -113,6 +113,10 @@
     width: 100%;
     bottom: 30%;
     transform: translate(0, 50%);
+
+    @media (min-width: 992px) {
+      bottom: 45%;
+    }
   }
 
   button {
@@ -391,7 +395,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: transparent url(https://d3w33imimg0eu8.cloudfront.net/images/loading-beat.gif) center no-repeat;
+    background: transparent url(https://s3-us-west-2.amazonaws.com/content-gpb.foxzero.io/assets/images/logo.png) center no-repeat;
   }
 
   .hero {

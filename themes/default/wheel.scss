@@ -13,6 +13,9 @@
 .centerCircle, .valueContainer, .wheelOutline, .wheelText {
 pointer-events: none;
 }
+.wheelContainer {
+  margin-top: 1em;
+}
 .toast, .wheelContainer{
 text-align: center;
 }
