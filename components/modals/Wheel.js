@@ -2,9 +2,16 @@ import React from 'react';
 import _ from 'lodash';
 import {connect} from 'react-redux';
 import {Modal} from '@fox-zero/gpb-web/components/layout';
+import {transition as t} from '@boilerplatejs/core/actions/Transition';
 import * as analytics from '@fox-zero/gpb-web/lib/analytics';
 
-@connect(state => ({}), {})
+const DEFAULT_FILTER = 'All';
+
+@connect(state => {
+  return {
+    filters: state['@boilerplatejs/core'].Transition.filters || []
+  };
+}, {t})
 export default class extends Modal {
   static defaultProps = {
     onHide: () => {}
@@ -13,8 +20,8 @@ export default class extends Modal {
   state = {};
 
   componentDidUpdate(props) {
-    const { solution: wheel } = this.props;
-    const { wheelName, sources, wheelSegments, wheelConfiguration } = wheel;
+    const { solution: wheel, t, filters } = this.props;
+    const { wheelName, sources, wheelSegments, wheelConfiguration, wheelSearchFilter } = wheel;
 
     if (!wheelName && this.wheel) {
       this.wheel.restart();
@@ -24,7 +31,14 @@ export default class extends Modal {
       setTimeout(() => {
         (this.wheel = new Spin2WinWheel()).init({
           // Documentation: https://gist.github.com/chrisgannon/1afba5c07faeb9947a2e84d987200e3e
-          onResult: () => {},
+          onResult: () => {
+            const results = this.wheel.getGameProgress().map(result => result.msg);
+
+            t('filters', {
+              ...filters,
+              [wheelSearchFilter || DEFAULT_FILTER]: _.uniq(!wheelSearchFilter ? (filters[DEFAULT_FILTER] || []).concat(results) : results)
+            });
+          },
           onError: () => {},
           onGameEnd: () => {},
           spinTrigger: document.querySelector('.spin'),
@@ -36,14 +50,15 @@ export default class extends Modal {
             wheelSize: 560,
             clickToSpin: true,
             ...wheelConfiguration,
+            spinDestinationArray: [],
             segmentValuesArray: wheelSegments.map(({
-              segmentIconImage, segmentName, segmentProbability, segmentData
+              segmentIconImage, segmentName//, segmentProbability, segmentData
             }) => ({
               type: segmentIconImage ? 'image' : 'string',
               value: segmentIconImage || segmentName,
               resultText: segmentName,
-              probability: segmentProbability,
-              userData: segmentData,
+              // probability: segmentProbability,
+              // userData: segmentData,
               win: true
             }))
           }
