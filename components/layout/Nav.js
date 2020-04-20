@@ -29,14 +29,20 @@ export default class extends Nav {
         <nav>
           <a href="#" className="toggle" role="button" onClick={preventDefault}/>
           <div className="social">
-            <a title="Facebook: @fox.zero.agency" href="https://www.facebook.com/fox.zero.agency" target="_blank">
+            <a title="Twitch: @GrandPOObear" href="https://www.twitch.tv/grandpoobear" target="_blank">
+              <i className="fa fa-twitch"/>
+            </a>
+            <a title="YouTube: Grand POOBear" href="https://www.youtube.com/channel/UC3g50Yr3GFPYrBj-n55BdqA" target="_blank">
+              <i className="fa fa-youtube"/>
+            </a>
+            <a title="Instagram: @grandpoobear" href="https://www.instagram.com/grandpoobear" target="_blank">
+              <i className="fa fa-instagram"/>
+            </a>
+            <a title="Facebook: @grandpoobear" href="https://www.facebook.com/grandpoobear" target="_blank">
               <i className="fa fa-facebook-official"/>
             </a>
-            <a title="Twitter: @fox_zero_agency" href="https://twitter.com/fox_zero_agency" target="_blank">
+            <a title="Twitter: @GrandPOObear" href="https://twitter.com/GrandPOOBear" target="_blank">
               <i className="fa fa-twitter"/>
-            </a>
-            <a title="Instagram: @fox_zero_agency" href="https://www.instagram.com/fox_zero_agency" target="_blank">
-              <i className="fa fa-instagram"/>
             </a>
           </div>
           <ul data-copyright={`© ${(new Date()).getFullYear()} · Grand POOBear`}>

@@ -3,6 +3,14 @@
 //   50% { transform: scale3d(1.15, 1.15, 1); box-shadow: 0 0 1.25em rgba(89, 159, 198, .5); }
 //   to { transform: scale3d(1, 1, 1); box-shadow: 0 0 1.5em rgba(89, 159, 198, .25); }
 // }
+@keyframes rotate-tagline {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 @keyframes pulse {
   from { opacity: 0; }
@@ -109,7 +117,7 @@
   }
 
   .powered-by {
-    bottom: 30px;
+    bottom: 15px;
   }
 
   > div:last-of-type {
@@ -119,7 +127,7 @@
     transform: translate(0, 50%);
 
     @media (min-width: 992px) {
-      bottom: 42%;
+      bottom: 38%;
     }
   }
 
@@ -394,12 +402,17 @@
     content: ' ';
     display: table;
     position: absolute;
-    width: 150px;
-    height: 150px;
+    width: 250px;
+    height: 380px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: transparent url(https://s3-us-west-2.amazonaws.com/content-gpb.foxzero.io/assets/images/logo.png) center no-repeat;
+    background-size: 100%;
+    animation-name: pulse;
+    animation-iteration-count: 1;
+    animation-duration: 2s;
+    animation-timing-function: ease-in;
   }
 
   .hero {
