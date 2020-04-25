@@ -33,11 +33,12 @@ export default class extends Modal {
   componentDidUpdate(props) {
     const { solution: wheel, t, filters } = this.props;
     const { wheelName, sources, wheelSegments, wheelConfiguration, wheelSearchFilter } = wheel;
+    const isFullScreen = !!document.fullscreenElement;
 
     const getTextSize = size => {
       const value = size.replace(RE_SIZE, '$1');
       const unit = size.replace(RE_SIZE, '$2');
-      return (value * (global.isFullScreen ? (unit === 'em' ? 1.25 : 1.25) : 1)) + unit;
+      return (value * (isFullScreen ? (unit === 'em' ? 1.2 : 1.25) : 1)) + unit;
     };
 
     if (!wheelName && this.wheel) {
@@ -60,14 +61,14 @@ export default class extends Modal {
           onGameEnd: () => {},
           spinTrigger: document.querySelector('.spin'),
           data: {
-            wheelSize: 560 * (global.isFullScreen ? 1.35 : 1),
+            wheelSize: 560 * (isFullScreen ? 1.3 : 1),
             svgWidth: 800,
             svgHeight: 640,
             centerX: 400,
             centerY: 285,
             clickToSpin: true,
             ...wheelConfiguration,
-            wheelTextOffsetY: wheelConfiguration.wheelTextOffsetY * (global.isFullScreen ? 1.25 : 1),
+            wheelTextOffsetY: wheelConfiguration.wheelTextOffsetY * (isFullScreen ? 1.15 : 1),
             wheelTextSize: getTextSize(wheelConfiguration.wheelTextSize),
             spinDestinationArray: [],
             segmentValuesArray: wheelSegments.map(({

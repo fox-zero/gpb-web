@@ -48,14 +48,11 @@ export default class extends Nav {
     try {
       if (fullscreen) {
         await document.body.requestFullscreen();
-        global.isFullScreen = true;
       } else {
         await document.exitFullscreen();
-        global.isFullScreen = false;
       }
 
       this.setState({ settings: { ...this.state.settings, fullscreen } });
-      document.body.classList[global.isFullScreen ? 'add' : 'remove']('fullscreen');
     } catch (e) {}
   };
 

@@ -98,6 +98,7 @@ export default class extends Page {
     if (__CLIENT__) {
       document.querySelector('#app > section > .page').addEventListener('click', this.props.dismiss);
       document.querySelector('#app').classList.add('home');
+      global.addEventListener('resize', this.resize);
       global.setTimeout(() => this.setState({ ready: true }), 1000);
       this.cycleHeader();
     }
@@ -123,8 +124,14 @@ export default class extends Page {
       this.props.transition({ progress: 0.2 });
       document.querySelector('#app > section > .page').removeEventListener('click', this.props.dismiss);
       document.querySelector('#app').classList.remove('home');
+      global.removeEventListener('resize', this.resize);
     }
   }
+
+  resize = () => {
+    this.props.close();
+    document.body.classList[document.fullscreenElement ? 'add' : 'remove']('fullscreen');
+  };
 
   cycleHeader = (timer = HEADER_TIMER) => {
     const { transition, wheels: { length } } = this.props;
