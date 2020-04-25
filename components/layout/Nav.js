@@ -53,7 +53,9 @@ export default class extends Nav {
       }
 
       this.setState({ settings: { ...this.state.settings, fullscreen } });
-    } catch (e) {}
+    } catch (e) {
+      global.location.reload();
+    }
   };
 
   render() {

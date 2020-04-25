@@ -130,7 +130,6 @@ export default class extends Page {
 
   resize = () => {
     this.props.close();
-    document.body.classList[document.fullscreenElement ? 'add' : 'remove']('fullscreen');
   };
 
   cycleHeader = (timer = HEADER_TIMER) => {

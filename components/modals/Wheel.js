@@ -109,7 +109,7 @@ export default class extends Modal {
     return (
       <Modal {..._.omit(this.props, ['update', 'solution', 'create', 'destroy', 'check', 'recaptchaSiteKey', 'contact', 't'])}
         onHide={this.onHide}
-        className={`solution`}
+        className={`solution ${__CLIENT__ && document.fullscreenElement ? 'fullscreen' : ''}`}
         title={wheelName}
         dek={title}
         icon={wheelIcon}
