@@ -6,6 +6,7 @@ import {transition as t} from '@boilerplatejs/core/actions/Transition';
 import * as analytics from '@fox-zero/gpb-web/lib/analytics';
 
 const DEFAULT_FILTER = 'All';
+const RE_SIZE = /([\d\.]*)(.*)/;
 
 @connect(state => {
   return {
@@ -33,6 +34,12 @@ export default class extends Modal {
     const { solution: wheel, t, filters } = this.props;
     const { wheelName, sources, wheelSegments, wheelConfiguration, wheelSearchFilter } = wheel;
 
+    const getTextSize = size => {
+      const value = size.replace(RE_SIZE, '$1');
+      const unit = size.replace(RE_SIZE, '$2');
+      return (value * (global.isFullScreen ? (unit === 'em' ? 1.25 : 1.25) : 1)) + unit;
+    };
+
     if (!wheelName && this.wheel) {
       this.wheel.restart();
     } else if (props.solution.wheelName !== wheelName) {
@@ -53,13 +60,15 @@ export default class extends Modal {
           onGameEnd: () => {},
           spinTrigger: document.querySelector('.spin'),
           data: {
+            wheelSize: 560 * (global.isFullScreen ? 1.35 : 1),
             svgWidth: 800,
             svgHeight: 640,
             centerX: 400,
             centerY: 285,
-            wheelSize: 560,
             clickToSpin: true,
             ...wheelConfiguration,
+            wheelTextOffsetY: wheelConfiguration.wheelTextOffsetY * (global.isFullScreen ? 1.25 : 1),
+            wheelTextSize: getTextSize(wheelConfiguration.wheelTextSize),
             spinDestinationArray: [],
             segmentValuesArray: wheelSegments.map(({
               segmentIconImage, segmentName, segmentResult//, segmentProbability, segmentData

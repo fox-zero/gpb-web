@@ -14,7 +14,10 @@
 pointer-events: none;
 }
 .wheelContainer {
-  margin-top: 1em;
+  margin-top: 2em;
+}
+.fullscreen .wheelContainer {
+  margin-top: 12vh;
 }
 .toast, .wheelContainer{
 text-align: center;
@@ -45,6 +48,9 @@ text-align: center;
     font-family: 'Fjalla One', Arial, sand-serif;;
     color: #ededed;
   }
+}
+.fullscreen .toast {
+  top: 34vh;
 }
 .wheelSVG {
 position: absolute;
@@ -82,4 +88,8 @@ outline: 0;
   left: 0;
   text-align: center;
   font-size: 1.25em;
+}
+.fullscreen .spin-container{
+  bottom: 8%;
+  font-size: 1.5em;
 }

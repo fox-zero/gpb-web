@@ -461,5 +461,28 @@ nav {
       color: $primary-red-color;
       transform: rotate(180deg);
     }
+
+    .fullscreen {
+      cursor: default;
+      pointer-events: none;
+
+      .on, .off, & {
+        color: $humility;
+      }
+
+      @media (min-width: 992px) {
+        cursor: pointer;
+        pointer-events: auto;
+        color: #efefef;
+
+        .on {
+          color: $primary-green-color;
+        }
+
+        .off {
+          color: $primary-red-color;
+        }
+      }
+    }
   }
 }

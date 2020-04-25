@@ -48,11 +48,14 @@ export default class extends Nav {
     try {
       if (fullscreen) {
         await document.body.requestFullscreen();
+        global.isFullScreen = true;
       } else {
         await document.exitFullscreen();
+        global.isFullScreen = false;
       }
 
       this.setState({ settings: { ...this.state.settings, fullscreen } });
+      document.body.classList[global.isFullScreen ? 'add' : 'remove']('fullscreen');
     } catch (e) {}
   };
 
@@ -98,7 +101,7 @@ export default class extends Nav {
             {__CLIENT__ && <li className="settings subnav">
               <a href="#" onClick={preventDefault}><i className="fa fa-cog"/> Settings</a>
               <ul>
-                <li onClick={this.toggleFullscreen} title="Activate full-screen mode.">
+                <li className="fullscreen" onClick={this.toggleFullscreen} title="Activate full-screen mode.">
                   <i className={`fa fa-toggle-on ${fullscreen ? 'on' : 'off'}`} /> Enable Full Screen
                 </li>
                 <li onClick={this.toggleCycle} title="Cycle through wheel descriptions in the main page automatically.">
