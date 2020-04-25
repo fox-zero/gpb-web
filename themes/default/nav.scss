@@ -442,3 +442,24 @@ body.nav-open,
   width: 100%;
   top: 100%;
 }
+
+nav {
+  .settings {
+    li {
+      cursor: pointer;
+    }
+
+    .on, .off {
+      transition: color .25s;
+    }
+
+    .on {
+      color: $primary-green-color;
+    }
+
+    .off {
+      color: $primary-red-color;
+      transform: rotate(180deg);
+    }
+  }
+}

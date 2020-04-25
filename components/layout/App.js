@@ -5,9 +5,15 @@ import Helmet from 'react-helmet';
 import {asyncConnect} from 'redux-async-connect-react16';
 import {push as pushState} from 'react-router-redux';
 import {App} from '@boilerplatejs/core/components/layout';
+import {transition} from '@boilerplatejs/core/actions/Transition';
 import {Nav} from '@fox-zero/gpb-web/components/layout';
 import * as Config from '@boilerplatejs/core/actions/Config';
 import * as Session from '@boilerplatejs/core/actions/Session';
+
+const SETTINGS_DEFAULT = {
+  fullscreen: false,
+  cycle: true
+};
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
@@ -28,16 +34,29 @@ import * as Session from '@boilerplatejs/core/actions/Session';
 
 @connect(state => ({
   user: state['@boilerplatejs/core'].Session.user,
-  config: state['@boilerplatejs/core'].Config['@boilerplatejs/core']
-}), {pushState})
+  config: state['@boilerplatejs/core'].Config['@boilerplatejs/core'],
+  settings: __CLIENT__ ? JSON.parse(global.localStorage.getItem('settings') || JSON.stringify(SETTINGS_DEFAULT)) : SETTINGS_DEFAULT
+}), {pushState, transition})
 
 export default class extends App {
   static propTypes = {
     config: PropTypes.object,
     children: PropTypes.object.isRequired,
     user: PropTypes.object,
-    pushState: PropTypes.func.isRequired
+    pushState: PropTypes.func.isRequired,
+    transition: PropTypes.func.isRequired,
+    settings: PropTypes.object
   };
+
+  componentDidMount() {
+    if (__CLIENT__) {
+      const { cycle } = this.props.settings;
+
+      if (!cycle) {
+        this.props.transition('timer', 0);
+      }
+    }
+  }
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.user && nextProps.user) {

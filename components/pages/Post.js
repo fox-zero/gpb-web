@@ -8,7 +8,7 @@ import {Page} from '@boilerplatejs/core/components/layout';
 import {transition} from '@boilerplatejs/core/actions/Transition';
 import {dismiss} from '@fox-zero/gpb-web/actions/Nav';
 import {open, close} from '@fox-zero/gpb-web/actions/Solution';
-import {Footer} from '@fox-zero/gpb-web/components/layout';
+// import {Footer} from '@fox-zero/gpb-web/components/layout';
 import {Solution} from '@fox-zero/gpb-web/components/buttons';
 import * as modals from '@fox-zero/gpb-web/components/modals';
 import {brand} from '@fox-zero/gpb-web/data';

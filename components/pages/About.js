@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {PropTypes} from 'prop-types';
 import {Page} from '@boilerplatejs/core/components/layout';
 import {dismiss} from '@fox-zero/gpb-web/actions/Nav';
-import {Footer} from '@fox-zero/gpb-web/components/layout';
+// import {Footer} from '@fox-zero/gpb-web/components/layout';
 
 @connect(() => ({}), {dismiss})
 

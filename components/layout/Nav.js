@@ -7,20 +7,58 @@ import {Progress} from '@boilerplatejs/core/components/layout';
 import {load, dismiss} from '@fox-zero/gpb-web/actions/Nav';
 import {transition} from '@boilerplatejs/core/actions/Transition';
 
-@connect(state => ({section: state.router.params.section}), {load, dismiss, transition})
+const HEADER_TIMER = 15;
+
+const SETTINGS_DEFAULT = {
+  fullscreen: false,
+  cycle: true
+};
+
+@connect(state => ({}), {load, dismiss, transition})
 
 export default class extends Nav {
   static propTypes = {
     load: PropTypes.func.isRequired,
     transition: PropTypes.func.isRequired,
-    dismiss: PropTypes.func.isRequired,
-    section: PropTypes.string
+    dismiss: PropTypes.func.isRequired
+  };
+
+  state = {
+    settings: __CLIENT__ ? JSON.parse(global.localStorage.getItem('settings') || JSON.stringify(SETTINGS_DEFAULT)) : SETTINGS_DEFAULT
   };
 
   componentDidMount = () => this.props.load();
 
+  save = settings => {
+    global.localStorage.setItem('settings', JSON.stringify(_.omit(settings, ['fullscreen'])));
+  }
+
+  toggleCycle = async () => {
+    const cycle = !this.state.settings.cycle;
+    const settings = { ...this.state.settings, cycle };
+
+    this.props.transition('timer', cycle ? HEADER_TIMER : 0);
+    this.setState({ settings });
+    this.save(settings);
+  };
+
+  toggleFullscreen = async () => {
+    const fullscreen = !this.state.settings.fullscreen;
+
+    try {
+      if (fullscreen) {
+        await document.body.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
+
+      this.setState({ settings: { ...this.state.settings, fullscreen } });
+    } catch (e) {}
+  };
+
   render() {
     const preventDefault = e => e.preventDefault();
+    const { fullscreen, cycle } = this.state.settings;
 
     return (
       <section className="nav">
@@ -49,21 +87,25 @@ export default class extends Nav {
             <li className="home">
               <Link rel="nofollow" to="/" className="logo"/>
             </li>
-            <li>
+            {/* <li>
               <Link to="/post/wheel-of-the-people">
                 <i className="fa fa-pie-chart"/> Wheel of the People
               </Link>
             </li>
-            {/* <li>
+            <li>
               <Link to="/contact"><i className="fa fa-envelope"/> Contact Us</Link>
             </li> */}
-            <li className="subnav">
+            {__CLIENT__ && <li className="settings subnav">
               <a href="#" onClick={preventDefault}><i className="fa fa-cog"/> Settings</a>
               <ul>
-                <li><i className="fa fa-toggle-off"/> Full-screen mode</li>
-                <li><i className="fa fa-toggle-on"/> Auto-cycle header</li>
+                <li onClick={this.toggleFullscreen} title="Activate full-screen mode.">
+                  <i className={`fa fa-toggle-on ${fullscreen ? 'on' : 'off'}`} /> Enable Full Screen
+                </li>
+                <li onClick={this.toggleCycle} title="Cycle through wheel descriptions in the main page automatically.">
+                  <i className={`fa fa-toggle-on ${cycle ? 'on' : 'off'}`} /> Auto-Cycle Wheels
+                </li>
               </ul>
-            </li>
+            </li>}
           </ul>
         </nav>
       </section>
