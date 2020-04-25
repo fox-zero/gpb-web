@@ -17,7 +17,17 @@ export default class extends Modal {
     onHide: () => {}
   };
 
-  state = {};
+  state = {
+    active: false
+  };
+
+  componentWillUpdate(props) {
+    const { solution: wheel } = props;
+
+    if (!wheel.wheelName && this.state.active) {
+      this.setState({ active: false });
+    }
+  }
 
   componentDidUpdate(props) {
     const { solution: wheel, t, filters } = this.props;
@@ -52,14 +62,14 @@ export default class extends Modal {
             ...wheelConfiguration,
             spinDestinationArray: [],
             segmentValuesArray: wheelSegments.map(({
-              segmentIconImage, segmentName//, segmentProbability, segmentData
+              segmentIconImage, segmentName, segmentResult//, segmentProbability, segmentData
             }) => ({
+              win: true,
               type: segmentIconImage ? 'image' : 'string',
               value: segmentIconImage || segmentName,
-              resultText: segmentName,
+              resultText: segmentResult || segmentName,
               // probability: segmentProbability,
-              // userData: segmentData,
-              win: true
+              // userData: segmentData
             }))
           }
         });
@@ -67,13 +77,17 @@ export default class extends Modal {
     }
   }
 
+  onSpin = () => this.setState({ active: true });
+
   onHide = (...args) => {
     this.props.onHide.apply(this, args);
   };
 
   render() {
+    const { active } = this.state;
     const { solution: wheel } = this.props;
-    const { wheelName, slug, summary, title, subject, wheelIcon = 'pie-chart', wheelBackgroundImage = {} } = wheel;
+    const { wheelName, slug, summary, title, subject, wheelIcon = 'pie-chart', wheelBackgroundImage = {}, wheelConfiguration = {} } = wheel;
+    const { introText } = wheelConfiguration;
     const { location = {} } = global;
     const share = {
       url: `${location.protocol}//${location.host}${slug ? `/post/${slug.toLowerCase()}` : ''}`,
@@ -83,7 +97,7 @@ export default class extends Modal {
     };
 
     return (
-      <Modal {..._.omit(this.props, ['update', 'solution', 'create', 'destroy', 'check', 'recaptchaSiteKey', 'contact'])}
+      <Modal {..._.omit(this.props, ['update', 'solution', 'create', 'destroy', 'check', 'recaptchaSiteKey', 'contact', 't'])}
         onHide={this.onHide}
         className={`solution`}
         title={wheelName}
@@ -116,12 +130,12 @@ export default class extends Modal {
               <g className="valueContainer" />
               <image xlinkHref="https://s3-us-west-2.amazonaws.com/content-gpb.foxzero.io/assets/images/logo.png" width="200" height="200" x="300" y="187" />
             </svg>
-            <div className="toast">
+            <div className={`toast ${active || introText ? 'active' : ''}`}>
               <p />
             </div>
           </div>
           <div className="spin-container">
-            <button className="spin btn btn-success">
+            <button className="spin btn btn-success" onClick={this.onSpin}>
               <i className="fa fa-hand-o-right" />
               <span>Spin <span>for the People</span></span>
             </button>

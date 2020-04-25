@@ -29,6 +29,11 @@ text-align: center;
   white-space: nowrap;
   border-radius: 12px;
   opacity: 0;
+  display: none;
+
+  &.active {
+    display: block;
+  }
 
   @media (min-width: 992px) {
     top: 23vh;

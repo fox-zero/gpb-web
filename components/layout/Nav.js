@@ -57,6 +57,13 @@ export default class extends Nav {
             {/* <li>
               <Link to="/contact"><i className="fa fa-envelope"/> Contact Us</Link>
             </li> */}
+            <li className="subnav">
+              <a href="#" onClick={preventDefault}><i className="fa fa-cog"/> Settings</a>
+              <ul>
+                <li><i className="fa fa-toggle-off"/> Full-screen mode</li>
+                <li><i className="fa fa-toggle-on"/> Auto-cycle header</li>
+              </ul>
+            </li>
           </ul>
         </nav>
       </section>

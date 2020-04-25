@@ -62,8 +62,8 @@ export default class extends Component {
           <span>Powered by</span>
           <span>
             <img src="https://d3w33imimg0eu8.cloudfront.net/images/logo.png" alt="Fox Zero™ · Zero Latency Software Consultancy™" />
-            <i className="fa fa-plus"></i>
-            <img src="https://s3-us-west-2.amazonaws.com/content-gpb.foxzero.io/assets/images/redbull.png" />
+            {/* <i className="fa fa-plus"></i>
+            <img src="https://s3-us-west-2.amazonaws.com/content-gpb.foxzero.io/assets/images/redbull.png" /> */}
           </span>
         </div>
         <Modal.Header>
@@ -73,7 +73,7 @@ export default class extends Component {
         </Modal.Header>
         <Modal.Body>{children}</Modal.Body>
         <Modal.Footer>
-          <span>&copy; {(new Date()).getFullYear()} · Grand POOBear · Powered by <a href="https://foxzoero.io">Fox Zero™</a></span>
+          <span>&copy; {(new Date()).getFullYear()} · Grand POOBear · Powered by <a href="https://foxzero.io">Fox Zero™</a></span>
         </Modal.Footer>
       </Modal>
     );

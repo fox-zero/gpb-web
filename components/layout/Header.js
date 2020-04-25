@@ -10,7 +10,7 @@ import {brand} from '@fox-zero/gpb-web/data';
 const PROGRESS_INCREMENT = 100;
 
 @connect((state, props) => ({
-  wheels: ({ ...brand, ...state['@boilerplatejs/strapi'].Entry.posts.content }).wheels.filter(wheel => wheel.wheelSegments.length > 1),
+  wheels: ({ ...brand, ...state['@boilerplatejs/strapi'].Entry.posts.content }).wheels.filter(wheel => wheel.wheelActive && wheel.wheelSegments.length > 1),
   slide: state['@boilerplatejs/core'].Transition.slide || props.slide || 0,
   pause: state['@boilerplatejs/core'].Transition['timer.pause'],
   initial: state['@boilerplatejs/core'].Transition['slide.initial']
@@ -187,9 +187,11 @@ export default class extends Header {
         {wheels.length && <div className="powered-by">
             <span>Powered by</span>
             <span>
-              <img src="https://d3w33imimg0eu8.cloudfront.net/images/logo.png" alt="Fox Zero™ · Zero Latency Software Consultancy™" />
-              <i className="fa fa-plus"></i>
-              <img src="https://s3-us-west-2.amazonaws.com/content-gpb.foxzero.io/assets/images/redbull.png" />
+              <a href="https://foxzero.io">
+                <img src="https://d3w33imimg0eu8.cloudfront.net/images/logo.png" alt="Fox Zero™ · Zero Latency Software Consultancy™" />
+              </a>
+              {/* <i className="fa fa-plus"></i>
+              <img src="https://s3-us-west-2.amazonaws.com/content-gpb.foxzero.io/assets/images/redbull.png" /> */}
             </span>
         </div>}
         {length ? (

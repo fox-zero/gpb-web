@@ -37,6 +37,42 @@ export default class {
       where: { value: 'twitter:image:alt' }
     });
 
+    await MetaTag.update({
+      content: 'Grand POOBear'
+    }, {
+      where: { value: 'og:site_name' }
+    });
+
+    await MetaTag.update({
+      content: '@grandpoobear'
+    }, {
+      where: { value: 'og:site' }
+    });
+
+    await MetaTag.update({
+      content: '@grandpoobear'
+    }, {
+      where: { value: 'og:creator' }
+    });
+
+    await MetaTag.update({
+      content: '@grandpoobear'
+    }, {
+      where: { value: 'twitter:site' }
+    });
+
+    await MetaTag.update({
+      content: '@grandpoobear'
+    }, {
+      where: { value: 'twitter:creator' }
+    });
+
+    await MetaTag.update({
+      content: 'Grand POOBear'
+    }, {
+      where: { value: 'og:site_name' }
+    });
+
     await Page.update({
       title: `${NAME} · ${TITLE}`
     }, {
