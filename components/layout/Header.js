@@ -63,19 +63,15 @@ export default class extends Header {
     this.clearTimer();
   }
 
-  componentDidUpdate(next) {
+  componentDidUpdate(props, state) {
     if (this.props.pause) {
       this.clearTimer();
     } else {
       this.resetTimer();
     }
-  }
 
-  componentWillReceiveProps(next) {
-    const { slide } = this.props;
-
-    if (!this.state.animating) {
-      this.setState({ previous: slide !== next.slide ? slide : undefined });
+    if (props.slide !== this.props.slide) {
+      this.setState({ previous: props.slide });
     }
   }
 
