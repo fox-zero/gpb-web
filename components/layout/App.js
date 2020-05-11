@@ -80,7 +80,6 @@ export default class extends App {
         {recaptchaSiteKey && <>
           <script async src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`}></script>
         </>}
-        <script async type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4265573.js"></script>
       </App>
     );
   }
